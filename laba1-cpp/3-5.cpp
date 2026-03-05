@@ -73,7 +73,7 @@ float count_time(bool(search)(int start, int end, int target), int N, int target
 
 
 //поиск по N = 10^... для target = -1 - не в массиве: смысла генерить 50 раз нету
-void worst_case(void(rand_data)(int N), bool(*search)(int start, int end, int target)){
+void worst_case(void(rand_data)(int N), bool(search)(int start, int end, int target)){
     std::cout << "WORST CASE SCENARIO\n";
 
     for (int N = 100; N <= 1000000; N*=10) {
@@ -84,10 +84,8 @@ void worst_case(void(rand_data)(int N), bool(*search)(int start, int end, int ta
 }
 
 //поиск для случ target из массива
-void avg_case(void(rand_data)(int N), bool(*search)(int start, int end, int target)){
+void avg_case(void(rand_data)(int N), bool(search)(int start, int end, int target)){
     std::cout << "AVG CASE SCENARIO\n";
-
-    srand((int)time(0));
     int iter = 100;
 
     for (int N = 100; N <= 1000000; N*=10) { //  берем все нужные длины N
@@ -106,6 +104,8 @@ void avg_case(void(rand_data)(int N), bool(*search)(int start, int end, int targ
 
 
 int main() {
+    srand((int)time(0));
+
     worst_case(rand_data_unsorted, lin_search); // худший лин
     avg_case(rand_data_unsorted, lin_search); // средний лин
     worst_case(rand_data_sorted, bin_search); // худший бин
